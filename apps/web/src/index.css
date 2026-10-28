@@ -1,0 +1,75 @@
+:root {
+  --accent: #0078d4;
+  --bg: #eef3f9;
+  --text: #11202e;
+  --muted: #5b6b7b;
+  --card-solid: #ffffff;
+  --card-glass: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.75);
+  --card-bg: var(--card-glass);
+  --blur: 18px;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1118;
+  --text: #e8f0f8;
+  --muted: #8da0b3;
+  --card-solid: #16212d;
+  --card-glass: rgba(30, 42, 56, 0.55);
+  --border: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-glass="off"] {
+  --card-bg: var(--card-solid);
+  --blur: 0px;
+}
+
+:root[data-glass="reduced"] {
+  --blur: 6px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 45%),
+    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 40%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+.app { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+
+.settings { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 24px; }
+
+select, button {
+  font: inherit;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.card {
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 { margin: 0 0 6px; color: var(--accent); }
+.card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
