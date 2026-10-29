@@ -3,11 +3,23 @@ import { AuthProvider, useAuth } from "./features/auth/AuthContext";
 import AuthPage from "./features/auth/AuthPage";
 import HomeCards from "./features/home/HomeCards";
 
+const DEFAULT_ACCENT = "#0078d4";
+
+const ACCENTS = [
+  { name: "Azul Windows", value: "#0078d4" },
+  { name: "Ciano", value: "#0891b2" },
+  { name: "Verde", value: "#16a34a" },
+  { name: "Laranja", value: "#ea580c" },
+  { name: "Rosa", value: "#db2777" },
+  { name: "Grafite", value: "#475569" },
+];
+
 function Home() {
   const { profile, updateProfile, signOut } = useAuth();
 
   const mode = profile?.theme_mode ?? "auto";
   const glass = profile?.glass_mode ?? "on";
+  const accent = profile?.accent_color || DEFAULT_ACCENT;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -24,6 +36,11 @@ function Home() {
     document.documentElement.dataset.glass = glass;
   }, [glass]);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty("--accent", accent);
+    return () => document.documentElement.style.removeProperty("--accent");
+  }, [accent]);
+
   return (
     <div className="app">
       <div className="topbar">
@@ -33,7 +50,7 @@ function Home() {
 
       <div className="settings">
         <label>
-          Tema:{" "}
+          Tema:
           <select
             value={mode}
             onChange={(e) => updateProfile({ theme_mode: e.target.value as "auto" | "light" | "dark" })}
@@ -44,7 +61,7 @@ function Home() {
           </select>
         </label>
         <label>
-          Liquid Glass:{" "}
+          Liquid Glass:
           <select
             value={glass}
             onChange={(e) => updateProfile({ glass_mode: e.target.value as "on" | "reduced" | "off" })}
@@ -54,6 +71,21 @@ function Home() {
             <option value="off">Desativado</option>
           </select>
         </label>
+        <div className="swatches" role="group" aria-label="Cor de destaque">
+          Cor:
+          {ACCENTS.map((a) => (
+            <button
+              key={a.value}
+              type="button"
+              className="swatch"
+              style={{ background: a.value }}
+              title={a.name}
+              aria-label={a.name}
+              aria-pressed={accent.toLowerCase() === a.value}
+              onClick={() => updateProfile({ accent_color: a.value })}
+            />
+          ))}
+        </div>
       </div>
 
       <HomeCards />
