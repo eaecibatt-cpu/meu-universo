@@ -1,16 +1,7 @@
 import { useEffect } from "react";
 import { AuthProvider, useAuth } from "./features/auth/AuthContext";
 import AuthPage from "./features/auth/AuthPage";
-
-const CARDS = [
-  { title: "Agenda", text: "Compromissos e eventos" },
-  { title: "Tarefas", text: "O que precisa ser feito" },
-  { title: "Lista de compras", text: "Mercado e afins" },
-  { title: "Diário", text: "Seu dia, em palavras" },
-  { title: "Faculdade", text: "Disciplinas, provas e prazos" },
-  { title: "Notas", text: "Anotações rápidas" },
-  { title: "Meu espaço pessoal", text: "Memórias e coleções" },
-];
+import HomeCards from "./features/home/HomeCards";
 
 function Home() {
   const { profile, updateProfile, signOut } = useAuth();
@@ -65,14 +56,7 @@ function Home() {
         </label>
       </div>
 
-      <div className="grid">
-        {CARDS.map((c) => (
-          <div className="card" key={c.title}>
-            <h3>{c.title}</h3>
-            <p>{c.text}</p>
-          </div>
-        ))}
-      </div>
+      <HomeCards />
     </div>
   );
 }

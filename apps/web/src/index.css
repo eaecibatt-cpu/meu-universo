@@ -100,3 +100,12 @@ button.link { background: none; border: none; color: var(--accent); cursor: poin
 .msg { margin: 0; font-size: 0.9rem; }
 .msg.error { color: #d13438; }
 .msg.info { color: var(--accent); }
+
+.cards-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.cards-header h2 { margin: 0; font-size: 1.2rem; }
+
+.edit-list { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }
+.edit-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.edit-buttons { display: flex; gap: 6px; }
+.edit-buttons button { padding: 4px 10px; cursor: pointer; }
+.edit-buttons button:disabled { opacity: 0.4; cursor: default; }

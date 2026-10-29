@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "../../data/supabase";
+import type { CardPref } from "../home/cards";
 
 export type Profile = {
   id: string;
@@ -8,6 +9,7 @@ export type Profile = {
   theme_mode: "auto" | "light" | "dark";
   glass_mode: "on" | "reduced" | "off";
   accent_color: string;
+  home_cards: CardPref[] | null;
 };
 
 type AuthState = {
